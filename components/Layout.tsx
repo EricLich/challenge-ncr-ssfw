@@ -11,10 +11,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <SiteHead />
-      <div className="w-screen h-screen grid place-content-center">
-        <div className="w-[1024px] h-[768px] bg-slate-100 flex flex-col justify-between rounded-md overflow-hidden">
+      <div className="w-screen h-screen grid place-content-center bg-slate-300">
+        <div className="w-[1024px] h-[768px] bg-slate-100 flex flex-col justify-between rounded-md overflow-hidden shadow-sm">
           <Header />
-          {children}
+          <div className="flex-1">{children}</div>
           <Footer />
         </div>
       </div>

@@ -7,7 +7,7 @@ export type Cuenta = {
   tipo_letras: TipoLetras;
 }
 
-export type cuesta = {
+export type Cuesta = {
   id: number;
   nombre: string;
 }
