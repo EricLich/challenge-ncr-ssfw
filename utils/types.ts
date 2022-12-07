@@ -25,3 +25,8 @@ export enum TipoLetras {
   CA = "Caja de Ahorro",
   CCP = "CCP",
 }
+
+export type ApiResponseType = {
+  cuentas: Cuenta[];
+  cuestas: Cuesta[];
+}
