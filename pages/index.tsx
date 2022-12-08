@@ -18,9 +18,7 @@ const Home: NextPage<HomeProps> = ({ accounts, error }) => {
         mainTitle="Selecciona la cuenta a consultar"
       />
       {!error && accounts.length > 0 ? (
-        <Accounts accounts={accounts}>
-          <div>test</div>
-        </Accounts>
+        <Accounts accounts={accounts} />
       ) : (
         <p>There was an error</p>
       )}

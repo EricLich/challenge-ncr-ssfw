@@ -1,47 +1,45 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
-import {
-  calcTotalPages,
-  filterAccountsByCurrencyAndType,
-} from "../utils/functions";
+import React, { createContext, useEffect, useState } from "react";
+import { filterAccountsByCurrencyAndType } from "../utils/functions";
 import { Cuenta, Moneda, tipoCuenta, TipoCuenta } from "../utils/types";
+import AccountPages from "./AccounstPages";
 
 type AccountsContextValues = {
-  totalPages: number | null;
-  currentPage: number | null;
-  setCurrentPage: ((currentPage: number) => void) | undefined;
-  maxBtnsPerPage: number | null;
+  totalPages: number;
+  currentPage: number;
+  setCurrentPage: (currentPage: number) => void;
+  setTotalPages: (totalPages: number) => void;
+  maxBtnsPerPage: number;
   accounts: Cuenta[];
 };
 
-const AccountsContext = createContext<AccountsContextValues>({
-  totalPages: null,
-  currentPage: null,
-  setCurrentPage: undefined,
-  maxBtnsPerPage: null,
+export const AccountsContext = createContext<AccountsContextValues>({
+  totalPages: 0,
+  currentPage: 0,
+  setCurrentPage: (initial) => {},
+  setTotalPages: (initial) => {},
+  maxBtnsPerPage: 0,
   accounts: [],
 });
 
 type AccountsProps = {
-  children: ReactNode;
   accounts: Cuenta[];
 };
 
 const MAX_BTNS_PER_PAGE: number = 6;
-const FIRST_LAST_PAGE_AMOUNT_BTNS: number = 5;
+const BTNS_FIRST_LAST_PAGE: number = 5;
 
-const Accounts: React.FC<AccountsProps> = ({ children, accounts }) => {
+const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [totalPages, setTotalPages] = useState<number | null>(null);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [filteredAccounts, setFilteredAccounts] = useState<Cuenta[]>([]);
 
   useEffect(() => {
-    const filteredAccounts = filterAccountsByCurrencyAndType(
-      accounts,
-      [Moneda.ARS, Moneda.USD],
-      ["CC", "CA"]
-    );
-    setTotalPages(
-      (prev) =>
-        (prev = calcTotalPages(filteredAccounts.length, MAX_BTNS_PER_PAGE))
+    setFilteredAccounts(
+      filterAccountsByCurrencyAndType(
+        accounts,
+        [Moneda.ARS, Moneda.USD],
+        ["CC", "CA"]
+      )
     );
   }, []);
 
@@ -51,11 +49,14 @@ const Accounts: React.FC<AccountsProps> = ({ children, accounts }) => {
         currentPage,
         setCurrentPage,
         totalPages,
-        accounts,
+        setTotalPages,
+        accounts: filteredAccounts,
         maxBtnsPerPage: MAX_BTNS_PER_PAGE,
       }}
     >
-      <div className="w-full h-[80%]">{children}</div>
+      <div className="w-full h-[80%]">
+        <AccountPages />
+      </div>
     </AccountsContext.Provider>
   );
 };
