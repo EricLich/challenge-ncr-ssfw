@@ -7,7 +7,7 @@ type PageInfoProps = {
 
 const PageInfo: React.FC<PageInfoProps> = ({ toptitle, mainTitle }) => {
   return (
-    <div className="w-auto mx-auto flex flex-col justify-center items-center">
+    <div className="w-auto mx-auto flex flex-col justify-center items-center h-[20%]">
       <p className="text-lg text-slate-500">{toptitle}</p>
       <h2 className="text-4xl">{mainTitle}</h2>
     </div>

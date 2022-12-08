@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="w-screen h-screen grid place-content-center bg-slate-300">
         <div className="w-[1024px] h-[768px] bg-slate-100 flex flex-col justify-between rounded-md overflow-hidden shadow-sm">
           <Header />
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 h-full">{children}</div>
           <Footer />
         </div>
       </div>

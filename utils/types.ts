@@ -4,7 +4,7 @@ export type Cuenta = {
   t: string;
   saldo: string;
   moneda: Moneda;
-  tipo_letras: TipoLetras;
+  tipo_letras: TipoCuenta;
 }
 
 export type Cuesta = {
@@ -19,12 +19,15 @@ export enum Moneda {
   BS = "bs",
 }
 
-export enum TipoLetras {
-  CC = "Cuenta Corriente",
-  Cc = "Cc",
-  CA = "Caja de Ahorro",
-  CCP = "CCP",
-}
+export const tipoCuenta = {
+  CC: { apiReturned: 'CC', fullDescription: "Cuenta Corriente" },
+  CC2: { apiReturned: 'Cc', fullDescription: "Cc" },
+  CA: { apiReturned: 'CA', fullDescription: "Caja de Ahorro" },
+  CCP: { apiReturned: 'CCP', fullDescription: "CCP" },
+} as const;
+
+export type TipoCuenta = keyof typeof tipoCuenta
+
 
 export type ApiResponseType = {
   cuentas: Cuenta[];
