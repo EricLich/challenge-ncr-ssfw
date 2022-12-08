@@ -24,7 +24,7 @@ export const tipoCuenta = {
   CC2: { apiReturned: 'Cc', fullDescription: "Cc" },
   CA: { apiReturned: 'CA', fullDescription: "Caja de Ahorro" },
   CCP: { apiReturned: 'CCP', fullDescription: "CCP" },
-} as const;
+};
 
 export type TipoCuenta = keyof typeof tipoCuenta
 

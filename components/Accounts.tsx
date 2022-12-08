@@ -54,9 +54,7 @@ const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
         maxBtnsPerPage: MAX_BTNS_PER_PAGE,
       }}
     >
-      <div className="w-full h-[80%]">
-        <AccountPages />
-      </div>
+      <AccountPages />
     </AccountsContext.Provider>
   );
 };

@@ -22,7 +22,14 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ text, type }) => {
     }
   };
 
-  return <button onClick={handleActionBtnClick}>{text}</button>;
+  return (
+    <button
+      className="flex flex-col justify-center items-center w-full h-full text-white bg-green-500 rounded-md shadow-sm text-2xl"
+      onClick={handleActionBtnClick}
+    >
+      {text}
+    </button>
+  );
 };
 
 export default ActionBtn;
