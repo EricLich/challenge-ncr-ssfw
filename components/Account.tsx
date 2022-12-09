@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+
 import { Cuenta, tipoCuenta, TipoCuenta } from "../utils/types";
 
 type AccountProps = {
@@ -13,7 +14,7 @@ const Account: React.FC<AccountProps> = ({ account }) => {
         pathname: `/account/${account?.n}`,
         query: account,
       }}
-      className="flex flex-col justify-center items-center w-full h-full text-white bg-green-500 rounded-md shadow-sm gap-2"
+      className="flex flex-col justify-center items-center w-full h-full text-white bg-green-500 rounded-md shadow-sm gap-2 hover:bg-green-600 duration-200"
     >
       <h3 className="text-2xl">
         {tipoCuenta[account.tipo_letras as TipoCuenta]?.fullDescription}

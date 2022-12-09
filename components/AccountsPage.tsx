@@ -17,7 +17,7 @@ const AccountsPage: React.FC<AccountsPageProps> = ({
     useContext(AccountsContext);
 
   return currentPage === pageIndex ? (
-    <div className="grid grid-cols-3 gap-4 h-[80%]">
+    <div className="grid grid-cols-3 gap-4 h-[80%] mt-auto">
       {pageIndex > 0 && <ActionBtn text="<< Opciones anteriores" type="back" />}
       {pageAccounts.map((account: Cuenta) => (
         <Account key={account.n + account.saldo} account={account} />

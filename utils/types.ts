@@ -26,7 +26,9 @@ export const tipoCuenta = {
   CCP: { apiReturned: 'CCP', fullDescription: "CCP" },
 };
 
-export type TipoCuenta = keyof typeof tipoCuenta
+export type TipoCuenta = keyof typeof tipoCuenta;
+
+export type ActionBtnType = "back" | "forward";
 
 
 export type ApiResponseType = {

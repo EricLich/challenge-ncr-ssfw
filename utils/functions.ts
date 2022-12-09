@@ -5,6 +5,9 @@ export function filterAccountsByCurrencyAndType(accounts: Cuenta[], acceptedCurr
 };
 
 export function createAccountPages(accounts: Cuenta[]): Cuenta[][] {
+  const BTNS_PER_FIRST_LAST_PAGE: number = 5;
+  const BTNS_PER_MIDDLE_PAGES: number = 4;
+
   let accountsCopy: Cuenta[] = [...accounts];
   let accountsLevels: Cuenta[][] = [];
   for (let i = 0; i < accountsCopy.length; i++) {
@@ -12,13 +15,13 @@ export function createAccountPages(accounts: Cuenta[]): Cuenta[][] {
     let accountsInLevel = [];
 
     if (accountsCopy.length === accounts.length) {
-      numberToBeMinorTo = 5;
-    } else if (accountsCopy.length <= 5) {
-      numberToBeMinorTo = 5;
+      numberToBeMinorTo = BTNS_PER_FIRST_LAST_PAGE;
+    } else if (accountsCopy.length <= BTNS_PER_FIRST_LAST_PAGE) {
+      numberToBeMinorTo = BTNS_PER_FIRST_LAST_PAGE;
     } else if (accountsCopy.length < accounts.length && i > 0) {
-      numberToBeMinorTo = 4;
+      numberToBeMinorTo = BTNS_PER_MIDDLE_PAGES;
     } else {
-      numberToBeMinorTo = 4;
+      numberToBeMinorTo = BTNS_PER_MIDDLE_PAGES;
     }
 
     for (let j = 0; j < numberToBeMinorTo; j++) {

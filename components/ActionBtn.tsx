@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
+import { ActionBtnType } from "../utils/types";
 import { AccountsContext } from "./Accounts";
 
 type ActionBtnProps = {
   text: string;
-  type: "back" | "forward";
+  type: ActionBtnType;
 };
 
 const ActionBtn: React.FC<ActionBtnProps> = ({ text, type }) => {
@@ -22,7 +23,7 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ text, type }) => {
 
   return (
     <button
-      className="flex flex-col justify-center items-center w-full h-full text-white bg-green-500 rounded-md shadow-sm text-2xl"
+      className="flex flex-col justify-center items-center w-full h-full text-white bg-green-500 rounded-md shadow-sm text-2xl hover:bg-green-600 duration-200"
       onClick={handleActionBtnClick}
     >
       {text}

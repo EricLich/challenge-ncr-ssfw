@@ -1,9 +1,9 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
-import { filterAccountsByCurrencyAndType } from "../utils/functions";
-import { Cuenta, Moneda, tipoCuenta, TipoCuenta } from "../utils/types";
-import AccountPages from "./AccounstPages";
 
-type AccountsContextValues = {
+import { Cuenta, Moneda } from "../utils/types";
+import { filterAccountsByCurrencyAndType } from "../utils/functions";
+
+interface AccountsContextValues {
   totalPages: number;
   currentPage: number;
   setCurrentPage: (currentPage: number) => void;
@@ -11,7 +11,7 @@ type AccountsContextValues = {
   maxBtnsPerPage: number;
   accounts: Cuenta[] | [];
   setAccounts: (accounts: Cuenta[]) => void;
-};
+}
 
 export const AccountsContext = createContext<AccountsContextValues>({
   totalPages: 0,
@@ -27,10 +27,8 @@ type AccountsProps = {
   children?: ReactNode;
 };
 
-const MAX_BTNS_PER_PAGE: number = 6;
-const BTNS_FIRST_LAST_PAGE: number = 5;
-
 const AccountsProvider: React.FC<AccountsProps> = ({ children }) => {
+  const MAX_BTNS_PER_PAGE: number = 6;
   const [accounts, setAccounts] = useState<Cuenta[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);

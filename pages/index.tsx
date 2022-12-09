@@ -1,6 +1,6 @@
 import { GetServerSideProps, NextPage } from "next";
 
-import Accounts, { AccountsContext } from "../components/Accounts";
+import { AccountsContext } from "../components/Accounts";
 import { ApiResponseType, Cuenta } from "../utils/types";
 import { baseApi } from "../utils/apiEndpoints";
 import PageInfo from "../components/PageInfo";
@@ -31,7 +31,11 @@ const Home: NextPage<HomeProps> = ({ accounts, error }) => {
       {!error && accounts.length > 0 ? (
         <AccountsPages />
       ) : (
-        <p>There was an error</p>
+        <div className="h-[80%] w-full grid place-content-center">
+          <p className="text-red-600 font-semibold text-lg">
+            There was an error
+          </p>
+        </div>
       )}
     </div>
   );
