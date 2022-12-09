@@ -7,7 +7,6 @@ type AccountProps = {
 };
 
 const Account: React.FC<AccountProps> = ({ account }) => {
-  console.log(account.tipo_letras);
   return (
     <Link
       href={{

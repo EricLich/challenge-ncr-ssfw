@@ -1,9 +1,11 @@
 import { GetServerSideProps, NextPage } from "next";
 
-import Accounts from "../components/Accounts";
+import Accounts, { AccountsContext } from "../components/Accounts";
 import { ApiResponseType, Cuenta } from "../utils/types";
 import { baseApi } from "../utils/apiEndpoints";
 import PageInfo from "../components/PageInfo";
+import AccountsPages from "../components/AccounstPages";
+import { useContext, useEffect } from "react";
 
 type HomeProps = {
   accounts: Cuenta[];
@@ -11,6 +13,15 @@ type HomeProps = {
 };
 
 const Home: NextPage<HomeProps> = ({ accounts, error }) => {
+  const { accounts: filteredAccounts, setAccounts } =
+    useContext(AccountsContext);
+
+  useEffect(() => {
+    if (filteredAccounts.length === 0) {
+      setAccounts(accounts);
+    }
+  }, [filteredAccounts]);
+
   return (
     <div className="w-[95%] flex-1 mx-auto  h-full">
       <PageInfo
@@ -18,7 +29,7 @@ const Home: NextPage<HomeProps> = ({ accounts, error }) => {
         mainTitle="Selecciona la cuenta a consultar"
       />
       {!error && accounts.length > 0 ? (
-        <Accounts accounts={accounts} />
+        <AccountsPages />
       ) : (
         <p>There was an error</p>
       )}

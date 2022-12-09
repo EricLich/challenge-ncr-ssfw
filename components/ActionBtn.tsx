@@ -12,12 +12,10 @@ const ActionBtn: React.FC<ActionBtnProps> = ({ text, type }) => {
 
   const handleActionBtnClick = () => {
     if (type === "back" && currentPage > 0) {
-      console.log("asd1");
       setCurrentPage(currentPage - 1);
     }
 
     if (type === "forward" && currentPage < totalPages) {
-      console.log("asd2");
       setCurrentPage(currentPage + 1);
     }
   };

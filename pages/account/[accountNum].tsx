@@ -8,8 +8,6 @@ const AccountNum = () => {
   const router = useRouter();
   const data = router.query;
 
-  console.log(data);
-
   return (
     <div className="w-[95%] flex-1 mx-auto  h-full">
       <PageInfo

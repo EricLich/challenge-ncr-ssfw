@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { filterAccountsByCurrencyAndType } from "../utils/functions";
 import { Cuenta, Moneda, tipoCuenta, TipoCuenta } from "../utils/types";
 import AccountPages from "./AccounstPages";
@@ -9,7 +9,8 @@ type AccountsContextValues = {
   setCurrentPage: (currentPage: number) => void;
   setTotalPages: (totalPages: number) => void;
   maxBtnsPerPage: number;
-  accounts: Cuenta[];
+  accounts: Cuenta[] | [];
+  setAccounts: (accounts: Cuenta[]) => void;
 };
 
 export const AccountsContext = createContext<AccountsContextValues>({
@@ -19,28 +20,33 @@ export const AccountsContext = createContext<AccountsContextValues>({
   setTotalPages: (initial) => {},
   maxBtnsPerPage: 0,
   accounts: [],
+  setAccounts: ([]) => {},
 });
 
 type AccountsProps = {
-  accounts: Cuenta[];
+  children?: ReactNode;
 };
 
 const MAX_BTNS_PER_PAGE: number = 6;
+const BTNS_FIRST_LAST_PAGE: number = 5;
 
-const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
+const AccountsProvider: React.FC<AccountsProps> = ({ children }) => {
+  const [accounts, setAccounts] = useState<Cuenta[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [filteredAccounts, setFilteredAccounts] = useState<Cuenta[]>([]);
 
   useEffect(() => {
-    setFilteredAccounts(
-      filterAccountsByCurrencyAndType(
-        accounts,
-        [Moneda.ARS, Moneda.USD],
-        ["CC", "CA"]
-      )
-    );
-  }, []);
+    if (accounts.length > 0) {
+      setFilteredAccounts(
+        filterAccountsByCurrencyAndType(
+          accounts,
+          [Moneda.ARS, Moneda.USD],
+          ["CC", "CA"]
+        )
+      );
+    }
+  }, [accounts]);
 
   return (
     <AccountsContext.Provider
@@ -50,12 +56,13 @@ const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
         totalPages,
         setTotalPages,
         accounts: filteredAccounts,
+        setAccounts,
         maxBtnsPerPage: MAX_BTNS_PER_PAGE,
       }}
     >
-      <AccountPages />
+      {children}
     </AccountsContext.Provider>
   );
 };
 
-export default Accounts;
+export default AccountsProvider;
