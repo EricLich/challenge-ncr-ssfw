@@ -10,7 +10,10 @@ const Account: React.FC<AccountProps> = ({ account }) => {
   console.log(account.tipo_letras);
   return (
     <Link
-      href={`/account/${account?.n}`}
+      href={{
+        pathname: `/account/${account?.n}`,
+        query: account,
+      }}
       className="flex flex-col justify-center items-center w-full h-full text-white bg-green-500 rounded-md shadow-sm gap-2"
     >
       <h3 className="text-2xl">

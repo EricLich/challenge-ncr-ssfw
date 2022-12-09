@@ -26,7 +26,6 @@ type AccountsProps = {
 };
 
 const MAX_BTNS_PER_PAGE: number = 6;
-const BTNS_FIRST_LAST_PAGE: number = 5;
 
 const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
   const [currentPage, setCurrentPage] = useState<number>(0);
