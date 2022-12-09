@@ -20,7 +20,7 @@ const AccountsPages = () => {
   }, [accounts, pages]);
 
   return (
-    <div className="h-full">
+    <div className="h-[95%]">
       {pages?.map((pageAccounts: Cuenta[], index: number) => {
         return (
           <AccountsPage
